@@ -1,0 +1,264 @@
+<!-- #### של בר פונקציה עובדת מקורית -->
+@login_required(login_url='login')
+def feed(request):
+    finalPosts = []
+    try:
+        posts = Post.objects.all().order_by('-created')
+
+        for x in posts:
+            if len(x.likes.all()) == 0:
+                finalPosts.append({"isLike": False, "post": x})
+            isLike = False
+            for like in x.likes.all():
+                if request.user == like.user:
+                    isLike = True
+                finalPosts.append({"isLike": isLike, "post": x})
+
+    except Exception as err:
+        print(err)
+        getpage = 1
+        finalPosts = []
+
+    getpage = request.GET.get('p')
+    if getpage == None:
+        getpage = 1
+
+    p = Paginator(finalPosts, 5)
+    page = p.page(getpage)
+
+    return render(request, 'socialmedia/feed.html', {"posts": finalPosts, "posts": page.object_list, "p": p})
+
+
+<!-- ##### פיד HTML מקורי -->
+
+<!-- {% extends 'main.html'%}
+
+{% block content %}
+<style>
+    .social-feed-separated .social-feed-box {
+        margin-left: 62px;
+    }
+    .social-feed-separated .social-avatar {
+        float: left;
+        padding: 0;
+    }
+    .social-feed-separated .social-avatar img {
+        width: 52px;
+        height: 52px;
+        border: 1px solid #e7eaec;
+    }
+    .social-feed-separated .social-feed-box .social-avatar {
+        padding: 15px 15px 0 15px;
+        float: none;
+    }
+    .social-feed-box {
+    /*padding: 15px;*/
+        border: 1px solid #e7eaec;
+        background: #fff;
+        margin-bottom: 15px;
+    }
+    .article .social-feed-box {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    .article .social-feed-box:last-child {
+        margin-bottom: 0;
+        border-bottom: 1px solid #e7eaec;
+    }
+    .article .social-feed-box p {
+        font-size: 13px;
+        line-height: 18px;
+    }
+    .social-action {
+        margin: 15px;
+    }
+    .social-avatar {
+        padding: 15px 15px 0 15px;
+    }
+    .social-comment .social-comment {
+        margin-left: 45px;
+    }
+    .social-avatar img {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+    .social-avatar .media-body a {
+        font-size: 14px;
+        display: block;
+    }
+    .social-body {
+        padding: 15px;
+    }
+    .social-body img {
+        margin-bottom: 10px;
+    }
+    .social-footer {
+        border-top: 1px solid #e7eaec;
+        padding: 10px 15px;
+        background: #f9f9f9;
+    }
+    .social-footer .social-comment img {
+        width: 32px;
+        margin-right: 10px;
+    }
+    .social-comment:first-child {
+        margin-top: 0;
+    }
+    .social-comment {
+        margin-top: 15px;
+    }
+    .social-comment textarea {
+        font-size: 12px;
+    }
+
+
+    .form-control, .single-line {
+        background-color: #FFFFFF;
+        background-image: none;
+        border: 1px solid #e5e6e7;
+        border-radius: 1px;
+        color: inherit;
+        display: block;
+        padding: 6px 12px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        width: 100%;
+        font-size: 14px;
+    }
+
+
+    .ibox {
+        clear: both;
+        margin-bottom: 25px;
+        margin-top: 0;
+        padding: 0;
+    }
+    .ibox.collapsed .ibox-content {
+        display: none;
+    }
+    .ibox.collapsed .fa.fa-chevron-up:before {
+        content: "\f078";
+    }
+    .ibox.collapsed .fa.fa-chevron-down:before {
+        content: "\f077";
+    }
+    .ibox:after,
+    .ibox:before {
+        display: table;
+    }
+    .ibox-title {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background-color: #ffffff;
+        border-color: #e7eaec;
+        border-image: none;
+        border-style: solid solid none;
+        border-width: 3px 0 0;
+        color: inherit;
+        margin-bottom: 0;
+        padding: 14px 15px 7px;
+        min-height: 48px;
+    }
+    .ibox-content {
+        background-color: #ffffff;
+        color: inherit;
+        padding: 15px 20px 20px 20px;
+        border-color: #e7eaec;
+        border-image: none;
+        border-style: solid solid none;
+        border-width: 1px 0;
+    }
+    .ibox-footer {
+        color: inherit;
+        border-top: 1px solid #e7eaec;
+        font-size: 90%;
+        background: #ffffff;
+        padding: 10px 15px;
+    }
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <div class="contentcenter" style="margin-top: 50px;">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+             {% for page_number in p.page_range %}
+             <li class="page-item"><a class="page-link" href="?p={{page_number}}">{{page_number}}</a></li>
+             {% endfor %}
+            </ul>
+        </nav>
+        <center><h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;color: white; ">Everyone Feed</h1></center>
+        {% for item in posts%}
+            <div class="container" style="margin-bottom: 50px">
+                <div class="col-md-11">
+                    <div class="social-feed-separated">
+                        <div class="social-avatar">
+                            <a href="{% url 'profile_username' item.post.user.user.username %}">
+                                <img alt="image" src="{{item.post.user.imageUrl}}">
+                            </a>
+                        </div>
+                        <div class="social-feed-box">
+                            <div class="social-avatar">
+                                <a href="{% url 'profile_username' item.post.user.user.username %}">
+                                    {{item.post.user}}
+                                </a>
+                                <small class="text-muted">{{item.post.created}}</small>
+                                {% if item.post.user.user.username == request.user.username %}
+                                    <span style="float: right;">
+                                        <a href="{% url 'edit_post' item.post.id %}" class="btn btn-sm btn-success">Edit</a>
+                                        <a href="{% url 'remove_post' item.post.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                    </span>
+                                {% endif %}
+                            </div>
+                            <div class="social-body">
+                                <p>
+                                    {{item.post.body}}
+                                </p>
+                                <img src="{{item.post.imageUrl}}" class="img-responsive">
+                                <div class="btn-group">
+                                      {% if item.isLike %}
+                                        <a href="{% url 'likes' item.post.id %}" class="btn btn-white btn-xs"><i class="fa fa-thumbs-down"></i> UNLike this!</a>
+                                      {% else %}
+                                        <a href="{% url 'likes' item.post.id %}" class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</a>
+                                      {% endif %} 
+                                    <button class="btn btn-white btn-xs" disabled><i class="fa fa-thumbs-up" style="color:green;"></i> {{item.post.likes.count}}</button>
+                                    <a href="{% url 'addcomment' item.post.id %}" class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</a>
+                                    <a href="{% url 'post_spesific' item.post.id %}" class="btn btn-white btn-xs"><i class="fa fa-share"></i>Get spesific</a>
+                                </div>
+                            </div>
+                            {% for comment in item.post.comment_set.all %}
+                                <div class="social-footer">
+                                    <div class="social-comment">
+                                        <a href="{% url 'profile_username' comment.user.username %}" class="pull-left">
+                                            <img alt="image" src="{{comment.user.profile_user.imageUrl}}">
+                                        </a>
+                                        <div class="media-body">
+                                            <a href="{% url 'profile_username' comment.user.username %}">
+                                                {{comment.user.username}}
+                                            </a>
+                                            <div style="text-align: right">
+                                                {% if comment.user.username == request.user.username %}
+                                                    <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-success">Edit comment</a>
+                                                    <a href="{% url 'remove_Comment' comment.id %}" class="btn btn-sm btn-danger">Delete comment</a>
+                                                {% endif %}
+                                            </div>
+                                            <br>
+                                                {{comment.body}}
+                                            <br>
+                                            <small class="text-muted">{{comment.created}}</small>
+                                            <div style="color:lightblue">__________________________________________________________________________________________________________________________________</div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %} -->

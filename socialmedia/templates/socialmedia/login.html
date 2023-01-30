@@ -1,0 +1,38 @@
+{% extends 'main.html'%}
+
+{% block content %}
+    <div class="user-box" style="margin-top: 100px;">
+        <div>
+            <center>
+                <img src="https://cdn.pixabay.com/photo/2016/01/19/07/35/social-1148031_960_720.png" height="45em" style="margin-bottom: 2vh; height: 150px; width: 350px;">
+                <h3 style="color:white">Log in to Network</h3><br>
+            </center>
+        </div>
+
+        <form action="{% url 'login' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control inp usrnm" type="text" name="username" placeholder="Username" autocomplete="off" autofocus>
+            </div>
+            <br>
+            <div class="form-group">
+                <input class="form-control inp pswd" type="password" name="password" placeholder="Password" autocomplete="off">
+                <span class="star"><small>{{message}}</small></span>
+            </div>
+            <br>
+            </br>
+            <center>
+                <input type="submit" value="Log in NOW!" class="btn btn-primary">
+            </center>
+        </form>
+
+        <div>
+            <center>
+                <span style="color:white">Don't have an account?&nbsp;&nbsp;<a href="{% url 'signup' %}">Sign Up</a></span>
+            </center>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <small style="color: rgb(252, 252, 252);font-weight: bold">Created By Amit Dehas ©</small>
+    </div>
+{% endblock %}

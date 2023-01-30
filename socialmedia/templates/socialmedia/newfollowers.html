@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="contentcenter" style="margin-top: 50px;">
+        <div class="container" style="width: 500px;margin-bottom: 50px">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                 {% for page_number in p.page_range %}
+                <li class="page-item"><a class="page-link" href="?p={{page_number}}">{{page_number}}</a></li>
+              
+                 {% endfor %}
+               
+                </ul>
+              </nav>
+            {% for friend in friends %}
+                <div class="col-md-11">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="{{friend.imageUrl}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h4 class="card-title">{{friend.first_name}}</h5>
+                            <h6>This user posted: {{friend.post_set.all |length}}</h6>
+                            <h6>This user have: {{friend.friends.all |length}} Friends</h6>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{friend.dob}}</li>
+                            <li class="list-group-item">{{friend.city}}</li>
+                            {% if friend.relationship == True %}
+                                <li class="list-group-item">In relationship</li>
+                            {% else %}
+                                <li class="list-group-item">single</li>
+                            {% endif %}
+                        </ul>
+                        <div class="card-body">
+                            <a href="{% url 'profile_username' friend.user.username %}" class="card-link">Go to {{friend.first_name}} Profile</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}    
+        </div>        
+    </div>
+{% endblock %}

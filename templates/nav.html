@@ -1,0 +1,151 @@
+<style>
+.sidenav {
+    height: 100%;
+    width: 10.2%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    list-style: none;
+    border-right: .5px solid rgba(219, 217, 217, 0.61);
+    z-index: 100;
+    padding-left: 1%;
+    background-color: rgba(219, 217, 217, 0.178);
+}
+.sidenav ul{
+    list-style: none;
+    padding-left: 0px;
+    margin-top: 3vh;
+}
+.sidenav li{
+    margin-top: 7px;
+}
+.sidenav .nav-link{
+    color: #000000;
+    line-height: .7em;
+    font-weight: 700;
+    padding: 0px;
+}
+.sidenav .nav-link > div{
+    padding: 10px 20px 8px 12px;
+    border-radius: 25px;
+    line-height: 0.9em;
+    width: max-content;
+}
+.sidenav .nav-link > div:hover{
+    color: #120ef3;
+    background-color: #ffffff;
+    transition-duration: .2s;
+}
+</style>
+
+<div class="sidenav">
+    <a href="{% url 'home' %}" class="navbar-brand">
+        <img src="https://cdn.pixabay.com/photo/2016/01/19/07/35/social-1148031_960_720.png" height="31px" width="250px">
+    </a>
+    <div style="height: 100%;">
+        <div>
+            <div>
+                <ul>
+                    {% if request.user.is_authenticated %} 
+                        <span class="navbar-nav">
+                            <small style="font-weight: bold;">Welcome {{user.username}}</small>
+                        </span>
+                        <!--Implement posts friends!!!! -->
+                        <li class="nav-item" id="all_posts">
+                            <a href="{% url 'feed' %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                        <path fill-rule="evenodd" d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;All Posts
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" id="all_posts">
+                            <a href="{% url 'friendsposts' %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                        <path fill-rule="evenodd" d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                                        <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;Friends Posts
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" id="following">
+                            <a href="{% url 'nav_following' %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.995-.944v-.002.002zM7.022 13h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zm7.973.056v-.002.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;My Friends
+                                </div>
+                            </a>
+                        </li>
+                        <a href="{% url 'new_followers' %}" class="nav-link">
+                            <div>
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.995-.944v-.002.002zM7.022 13h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zm7.973.056v-.002.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                                </svg>
+                                &nbsp;&nbsp;New Friends
+                            </div>
+                        </a>
+                        </li>
+                        <li class="nav-item" id="profile_username">
+                            <a href="{% url 'profile_username' request.user.username %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;Profile
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" id="logout">
+                            <a href="{% url 'logout' %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-door-open" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
+                                        <path fill-rule="evenodd" d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
+                                        <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;Log Out
+                                </div>
+                            </a>
+                        </li>
+                        <br>
+                        <a href="{% url 'new_post' request.user.username %}" class="btn btn-success new-post-btn">Create Post</a>
+                    {% else %}
+                        <li class="nav-item" id="login">
+                            <a href="{% url 'login' %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-door-closed" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2zm1 0v13h8V2H4z"/>
+                                        <path d="M7 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                        <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;Log In
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item" id="Signup">
+                            <a href="{% url 'signup' %}" class="nav-link">
+                                <div>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+                                    </svg>
+                                    &nbsp;&nbsp;Sign Up
+                                </div>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

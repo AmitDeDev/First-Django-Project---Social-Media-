@@ -1,0 +1,79 @@
+{% extends 'main.html'%}
+
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+            <!--Left Col-->
+            <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
+                <h1 class="font-bold text-4xl my-4">Social Media Project</h1>
+                <p class="leading-normal mb-4" style="font-weight: bold;color: white;">
+                    This project built by Amit Dehas .                
+                    This is only the beginning 
+                    Great things are on the way only need to grab them
+                    click on the <spans style="font-weight: bold;color: white;">PROFILE</span> Button now!
+                </p>
+                <div>
+                <a href="{% url 'profile_username' request.user.username %}" class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">
+                    <span style="font-weight: bold;color: whitesmoke;">My Profile</span>
+                </a>
+                
+                </div>
+                <br>
+                <p class="leading-normal mb-4" style="font-weight: bold;color: white;">                
+                    Check out your freinds posts now!
+                    click on the <spans style="font-weight: bold;">feed</span> Button!
+                </p>
+
+                <div>
+                    <a href="{% url 'feed' %}" class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">
+                        <span style="font-weight: bold;color: white;">Take me to feed</span>
+                    </a>
+                    
+                    </div>
+            </div>
+            <!--Right Col-->
+            <div class="w-full lg:w-1/2 lg:py-6 text-center;">
+                <h1><img src="https://www.teahub.io/photos/full/203-2031989_social-media-to-your-marketing.jpg" style="border-radius: 99999px;" class="imgbackground1"></h1>
+            </div>
+        </div>
+    {% else %}
+        <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+            <!--Left Col-->
+            <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
+                <h1 class="font-bold text-4xl my-4">Social Media Project</h1>
+                <p class="leading-normal mb-4" style="font-weight: bold;color: white;">
+                    This project built by Amit Dehas .                
+                    Haven't registered yet? 
+                    What are you waiting for?! 
+                    click on the <spans style="font-weight: bold;color: white;">Register</span> Button and join now!
+                </p>
+                <div>
+                <a href="{% url 'signup' %}" class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">
+                    <span style="font-weight: bold;color: whitesmoke;">Register</span>
+                </a>
+                
+                </div>
+                <br>
+                <p class="leading-normal mb-4" style="font-weight: bold;color: white;">                
+                    Already have an account? 
+                    click on the <spans style="font-weight: bold;">Log In</span> Button!
+                </p>
+
+                <div>
+                    <a href="{% url 'login' %}" class="bg-transparent hover:bg-gray-800 text-gray-800 hover:text-white rounded shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">
+                        <span style="font-weight: bold;color: white;">Login</span>
+                    </a>
+                    
+                    </div>
+            </div>
+            <!--Right Col-->
+            <div class="w-full lg:w-1/2 lg:py-6 text-center;">
+                <h1><img src="https://www.teahub.io/photos/full/203-2031989_social-media-to-your-marketing.jpg" style="border-radius: 99999px;" class="imgbackground1"></h1>
+            </div>
+        </div>
+    {% endif %}
+    <div style="text-align: center;">
+        <small style="color: rgb(252, 252, 252);font-weight: bold">Created By Amit Dehas ©</small>
+    </div>
+{% endblock %}

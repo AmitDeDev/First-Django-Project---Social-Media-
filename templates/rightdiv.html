@@ -1,0 +1,201 @@
+<style>                
+    .right-div{
+        width: 12%;
+        height: 100vh;
+        position: fixed;
+        right: 0.1%;
+        border-left: .5px solid rgba(219, 217, 217, 0);
+        background-color: rgba(219, 217, 217, 0);
+    }
+    .right-div .head{
+        padding: .9vh 1.5vw;
+    }
+    .right-div .search-div{
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        /*width: min-content;*/
+        border-radius: 25px;
+        background-color: #ffffff;
+        padding-left: 10px;
+        padding-right: 10px;
+        vertical-align: middle;
+    }
+    #search-box{
+        height: 5.7vh;
+        border: none;
+        background: none;
+        outline: none;
+        width: 100%;
+        margin-left: 8px;
+    }
+    #search-box::placeholder{
+        color: #6d7e8c;
+    }
+        
+        
+    .right-div-content{
+        height: 92.5vh;
+        overflow: auto;
+        padding-left: 1.5vw;
+        padding-right: 1.5vw;
+    }
+    .suggestion-box, .guest-box{
+        border-radius: 15px;
+        overflow: hidden;
+        background-color: #7cb7df;
+    }
+    .user-details #user-name:hover{
+        text-decoration: underline;
+    }
+    .suggestion-header{
+        padding: 13px 15px;
+        line-height: .9em;
+        font-weight: 800;
+        border-bottom: .5px solid #e6ecf0;
+    }
+    .suggestion-user{
+        display: flex;
+        padding: 10px 15px;
+        font-size: .9em;
+        border-bottom: .5px solid #e6ecf0;
+    }
+    .suggestion-user:hover{
+        background-color: #edf0f4;
+        cursor: pointer;
+        transition-duration: .2s;
+    }
+    .suggestion-user  a{
+        color: black;
+        text-decoration: none;
+    }
+    .user-details{
+        flex: 1;
+        line-height: 1.1em;
+        padding: 5px 0px 7px 0px;
+    }
+    .suggestion-user .btn{
+        padding: 0em 1em .09em 1em;
+    }
+    .suggestion-footer{
+        padding: 13px 15px;
+        line-height: .9em;
+    }
+    .suggestion-footer a{
+        text-decoration: none;
+    }
+        
+    .guest-header{
+        padding: 13px 15px 8px 15px;
+        line-height: .9em;
+        font-weight: bolder;
+    }
+    .guest-header h5{
+        margin-bottom: 0px;
+    }
+    .guest-content{
+        padding: 0px 15px 10px 15px;
+        font-size: .88em;
+    }
+    .guest-btn{
+        padding: 0px 15px 15px 15px;
+    }
+        
+        
+        
+    .right-div-content::-webkit-scrollbar{
+        visibility: hidden;
+        width: 8px;
+        transition-duration: .5s;
+        background-color: transparent;
+    }
+        
+    .right-div-content:hover::-webkit-scrollbar, .right-div-content:hover::-webkit-scrollbar-thumb{
+        border-radius: 8px;
+        background-color: rgb(128, 128, 128);
+        transition-duration: .5s;
+    }
+</style>
+<div class="right-div">
+    <nav class="head">
+            <div class="search-div">
+                <div>
+                    <svg width="1em" height="1.6em" viewBox="0 0 16 6" class="bi bi-search" fill="#6d7e8c" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                    </svg>
+                </div>
+                <form action="{% url 'search' %}" method="get">
+                    <input type="text" name="q" id="search-box" placeholder="Search">
+                </form>
+            </div>
+        </form>
+    </nav>
+    <div class='right-div-content'>
+        <div class="space" style="background-color: white;"></div>
+            <div class="suggestion-box">
+                <div class="suggestion-header">
+                    Groups you might LIKE
+                </div>
+                    <div class="suggestion-user">
+                        <div class="group-details">
+                            <a href="{% url 'comingsoon' %}">
+                                <div id="group">
+                                    <strong>
+                                        (group name)
+                                    </strong>
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <button class="btn btn-outline-success" type="button" style="color:white">Follow</button>
+                        </div>
+                    </div>
+                <div class="suggestion-footer">
+                    <a href="{% url 'comingsoon' %}" style="color:white">Show more</a>
+                </div>
+            </div>
+            {% if request.user.is_authenticated %}
+            <div class="guest-box">
+                <center>
+                    <div class="guest-header">
+                        <h5>Need help?</h5>
+                    </div>
+                    <div class="grey guest-content">
+                        Click below to get a tutorial on my projects options.
+                    </div>
+                    <div class="guest-btn">
+                        <button class="btn btn-success btn-block"><a href="{%url 'tutorial' %}" style="color:white">GET HELP</a></button>
+                    </div>
+                </center>
+            </div>
+            <div class="guest-box">
+                <center>
+                    <div class="guest-header">
+                        <h5>New Connections</h5>
+                    </div>
+                    <div class="grey guest-content">
+                        Its always good time to connect with new people!
+                    </div>
+                    <div class="guest-btn">
+                        <button class="btn btn-success btn-block"><a href="{% url 'new_followers' %}" style="color:white">People you might know</a></button>
+                    </div>
+                </center>
+            </div>
+            {% else %}
+            <div class="guest-box">
+                <center>
+                    <div class="guest-header">
+                        <h5>New to Network?</h5>
+                    </div>
+                    <div class="grey guest-content">
+                        Sign up now to get connected with people you know.
+                    </div>
+                    <div class="guest-btn">
+                        <button class="btn btn-success btn-block"><a href="{% url 'signup' %}" style="color:white">Sign Up</a></button>
+                    </div>
+                </center>
+            </div>
+            {% endif %}
+    </div>
+</div>

@@ -1,0 +1,33 @@
+{% extends 'main.html'%}
+
+{% block content %}
+    <div class="contentcenter" style="margin-top: 50px;">
+        <div class="container">
+            <div>
+                <center>
+                    <img src="https://cdn.pixabay.com/photo/2016/01/19/07/35/social-1148031_960_720.png" height="45em" style="margin-bottom: 2vh;margin-right: 50px; height: 150px; width: 350px;">
+                    <h2>Changed your Thoughts? Edit your post now</h2><br>
+                </center>
+            </div>
+            <div class="col-md-11">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label" style="font-weight: bold;">What's on your mind?</label>
+                        <br>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="body" rows="5" name="body">{{post.body}}</textarea>
+                    </div>
+                    <div>
+                        <label class="form-label" style="font-weight: bold;">Do you want to add a picture?</label>
+                        <input type="text" class="form-control" name="imageUrl" value="{{post.imageUrl}}" placeholder="image src">
+                    </div>
+                    <div style="margin-top: 25px;">
+                        <input type="submit" value="Edit my post" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

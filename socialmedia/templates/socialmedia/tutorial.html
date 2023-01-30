@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="contentcenter" style="margin-top: 50px;">
+        <div class="container" style="margin-bottom: 50px">
+            <div class="col-md-13">
+                <div class="card" style="width: 100%">
+                    <center>
+                        <img src="https://www.lifewire.com/thmb/RSStNfgAWGO8Q8U0fRRvTgz0qk0=/1732x1276/filters:fill(auto,1)/GettyImages-1047578412-692fa117cf86450287d8873eeb1a95c8.jpg"
+                        style="width:100%;height: 300px;" class="card-img-top" alt="...">
+                    </center>
+                    <div class="card-body">
+                    <h5 class="card-title">Search Options</h5>
+                    <p class="card-text">you can always search content within the project such as Profils / Posts / Comments.
+                        all you need to do is to write the thing you wish to find below or in the top right ' Search box' and hit the ENTER button on your keyboard!
+                    </p>
+                    <center>
+                        <form action="{% url 'search' %}" method="get">
+                            <input type="text" name="q" id="search-box" placeholder="Search" style="background-color: rgb(220, 230, 173);border-radius: 25px;text-align: center;">
+                        </form>
+                    </center>
+                    </div>
+                </div>
+                <br>
+                <div class="card" style="width: 100%">
+                    <img src="https://t4.ftcdn.net/jpg/04/03/77/35/360_F_403773594_e7twlEp1TQYZ6w0R5KO7hYUusvuG4ddZ.jpg" class="card-img-top" alt="..."
+                    style="width:100%;height: 300px;">
+                    <div class="card-body">
+                    <h5 class="card-title">My Profile</h5>
+                    <p class="card-text">You can see your profile from any page by clicking the Profile button on the nav bar or you can also click on the button below!
+                        Remember you can edit your profile and editing your posts or deleting them from the 'Feed' or from your profile.</p>
+                    <center>
+                        <a href="{% url 'profile_username' request.user.username %}" class="btn btn-primary">Go to my PROFILE</a>
+                    </center>
+                    </div>
+                </div>
+                <br>
+                <div class="card" style="width: 100%">
+                    <img src="https://learnenglish.britishcouncil.org/sites/podcasts/files/2021-10/RS6715_492969113-hig.jpg" class="card-img-top" alt="..."
+                    style="width:100%;height: 300px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Share you thougts with the world</h5>
+                    <p class="card-text">Something special happened today? share it with your friends! and create a post by clicking the green button ' Create Post' at the nav bar
+                        or click on the button below.</p>
+                    <center>
+                        <a href="{% url 'new_post' request.user.username %}" class="btn btn-success new-post-btn">Create Post</a>
+                    </center>
+                    </div>
+                </div>
+                <br>
+                <div class="card" style="width: 100%">
+                    <img src="https://cdn.vox-cdn.com/thumbor/sK3gMTENF_LR1DhAUl9e3V_5jC4=/0x0:2592x2017/1200x800/filters:focal(1089x801:1503x1215)/cdn.vox-cdn.com/uploads/chorus_image/image/65282724/friendscast.0.0.1429818191.0.jpg" class="card-img-top" alt="..."
+                    style="width:100%;height: 300px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Stay in Contact with your friends</h5>
+                    <p class="card-text">You can find your friends list by clicking on the 'Freinds' button or click on Find my friends below or you can also 
+                        Find new people by clicking on 'People you might know' button on the rith nav bar or by clicking on the New friends button below.</p>
+                    <center>
+                        <a href="{% url 'nav_following' %}" class="btn btn-success new-post-btn">Find my friends</a>
+                        <a href="{% url 'new_followers' %}" class="btn btn-primary new-post-btn">New friends</a>
+                    </center>
+                    </div>
+                </div>
+                <br>
+                <div class="card" style="width: 100%">
+                    <img src="https://ltheme.com/wp-content/uploads/2016/11/How-to-Allow-Users-to-Submit-Blog-Posts-on-Your-WordPress-Site.png" class="card-img-top" alt="..."
+                    style="width:100%;height: 300px;">
+                    <div class="card-body">
+                    <h5 class="card-title">You can choose between Posts</h5>
+                    <p class="card-text">You can see everyones Posts by clicking on the nav bar 'ALL POSTS' Or you can see only your friends posts by clicking on 'FRIENDS POSTS'.</p>
+                    <center>
+                        <a href="{% url 'feed' %}" class="btn btn-success new-post-btn">ALL POSTS</a>
+                        <a href="{% url 'friendsposts' %}" class="btn btn-primary new-post-btn">FRIENDS POSTS</a>
+                    </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

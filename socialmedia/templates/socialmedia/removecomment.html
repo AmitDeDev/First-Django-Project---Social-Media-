@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="contentcenter" style="margin-top: 200px;">
+        <div class="container">
+            <div class="col-md-11">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Are you sure you want to remove your comment?</div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Yes" class="btn btn-danger" style="width: 470px;">
+                            <a href="{% url 'feed' %}" class="btn btn-danger" style="width: 450px;">No</a>
+                        </form>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

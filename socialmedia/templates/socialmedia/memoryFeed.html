@@ -1,0 +1,667 @@
+{% extends 'main.html'%}
+
+{% block content %}
+<style>
+    .social-feed-separated .social-feed-box {
+        margin-left: 62px;
+    }
+    .social-feed-separated .social-avatar {
+        float: left;
+        padding: 0;
+    }
+    .social-feed-separated .social-avatar img {
+        width: 52px;
+        height: 52px;
+        border: 1px solid #e7eaec;
+    }
+    .social-feed-separated .social-feed-box .social-avatar {
+        padding: 15px 15px 0 15px;
+        float: none;
+    }
+    .social-feed-box {
+    /*padding: 15px;*/
+        border: 1px solid #e7eaec;
+        background: #fff;
+        margin-bottom: 15px;
+    }
+    .article .social-feed-box {
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+    .article .social-feed-box:last-child {
+        margin-bottom: 0;
+        border-bottom: 1px solid #e7eaec;
+    }
+    .article .social-feed-box p {
+        font-size: 13px;
+        line-height: 18px;
+    }
+    .social-action {
+        margin: 15px;
+    }
+    .social-avatar {
+        padding: 15px 15px 0 15px;
+    }
+    .social-comment .social-comment {
+        margin-left: 45px;
+    }
+    .social-avatar img {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+    .social-avatar .media-body a {
+        font-size: 14px;
+        display: block;
+    }
+    .social-body {
+        padding: 15px;
+    }
+    .social-body img {
+        margin-bottom: 10px;
+    }
+    .social-footer {
+        border-top: 1px solid #e7eaec;
+        padding: 10px 15px;
+        background: #f9f9f9;
+    }
+    .social-footer .social-comment img {
+        width: 32px;
+        margin-right: 10px;
+    }
+    .social-comment:first-child {
+        margin-top: 0;
+    }
+    .social-comment {
+        margin-top: 15px;
+    }
+    .social-comment textarea {
+        font-size: 12px;
+    }
+
+
+    .form-control, .single-line {
+        background-color: #FFFFFF;
+        background-image: none;
+        border: 1px solid #e5e6e7;
+        border-radius: 1px;
+        color: inherit;
+        display: block;
+        padding: 6px 12px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        width: 100%;
+        font-size: 14px;
+    }
+
+
+    .ibox {
+        clear: both;
+        margin-bottom: 25px;
+        margin-top: 0;
+        padding: 0;
+    }
+    .ibox.collapsed .ibox-content {
+        display: none;
+    }
+    .ibox.collapsed .fa.fa-chevron-up:before {
+        content: "\f078";
+    }
+    .ibox.collapsed .fa.fa-chevron-down:before {
+        content: "\f077";
+    }
+    .ibox:after,
+    .ibox:before {
+        display: table;
+    }
+    .ibox-title {
+        -moz-border-bottom-colors: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        background-color: #ffffff;
+        border-color: #e7eaec;
+        border-image: none;
+        border-style: solid solid none;
+        border-width: 3px 0 0;
+        color: inherit;
+        margin-bottom: 0;
+        padding: 14px 15px 7px;
+        min-height: 48px;
+    }
+    .ibox-content {
+        background-color: #ffffff;
+        color: inherit;
+        padding: 15px 20px 20px 20px;
+        border-color: #e7eaec;
+        border-image: none;
+        border-style: solid solid none;
+        border-width: 1px 0;
+    }
+    .ibox-footer {
+        color: inherit;
+        border-top: 1px solid #e7eaec;
+        font-size: 90%;
+        background: #ffffff;
+        padding: 10px 15px;
+    }
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="contentcenter">
+    <div class="container">
+        <div class="col-md-11">
+            {% for item in posts%}
+            <div class="social-feed-separated">
+                <div class="social-avatar">
+                    <a href="">
+                        <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    </a>
+                </div>
+
+                <div class="social-feed-box">
+                    <div class="social-avatar">
+                        <a href="#">
+                            {{item.user}}
+                        </a>
+                        <small class="text-muted">{{item.created}}</small>
+                        <span style="float: right;">
+                            <a href="#" class="btn btn-sm btn-success">Edit</a>
+                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        </span>
+                    </div>
+                    <div class="social-body">
+                        <p>
+                            {{item.body}}
+                        </p>
+                        <img src="{{item.imageUrl}}" class="img-responsive">
+                        <div class="btn-group">
+                            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-share"><a href="#"></a></i> Get spesific</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i>(likes amount)</button>
+                        </div>
+                    </div>
+                    <div class="social-footer">
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="{{item.user.imageUrl}}">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    The user name that comment on the post
+                                </a>
+                                    The text of the comment
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i>Amount of like on the comment (optional but not necessary)</a> -
+                                <small class="text-muted">12.06.2014 (the time the comment created)</small>
+                            </div>
+                        </div>
+<!-- 
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                Making this the first true generator on the Internet. It uses a dictionary of.
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                                <small class="text-muted">10.07.2014</small>
+                            </div>
+
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        Andrew Williams
+                                    </a>
+                                    Making this the first true generator on the Internet. It uses a dictionary of.
+                                    <br>
+                                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                                    <small class="text-muted">10.07.2014</small>
+                                </div>
+                            </div>
+                            <div class="social-comment">
+                                <a href="" class="pull-left">
+                                    <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar3.png">
+                                </a>
+                                <div class="media-body">
+                                    <textarea class="form-control" placeholder="Write comment..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                <small class="text-muted">12.06.2014</small>
+                            </div>
+                        </div>
+
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                Making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                <small class="text-muted">12.06.2014</small>
+                            </div>
+                        </div>
+
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                            </a>
+                            <div class="media-body">
+                                <textarea class="form-control" placeholder="Write comment..."></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div> -->
+            {% endfor %}
+-----
+            <!-- <div class="social-feed-separated">
+                <div class="social-avatar">
+                    <a href="">
+                        <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                    </a>
+                </div>
+
+                <div class="social-feed-box">
+                    <div class="pull-right social-action dropdown">
+                        <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu m-t-xs">
+                            <li><a href="#">Config</a></li>
+                        </ul>
+                    </div>
+                    <div class="social-avatar">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                    </div>
+                    <div class="social-body">
+                        <p>
+                            Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                            default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                            in their infancy.
+                        </p>
+                        <div class="btn-group">
+                            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-share"><a href="#"></a></i> Get spesific</button>
+                        </div>
+                    </div>
+                    <div class="social-footer">
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar2.png">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                                <small class="text-muted">12.06.2014</small>
+                            </div>
+                        </div>
+
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar3.png">
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Andrew Williams
+                                </a>
+                                Making this the first true generator on the Internet. It uses a dictionary of.
+                                <br>
+                                <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                                <small class="text-muted">10.07.2014</small>
+                            </div>
+                        </div>
+
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar3.png">
+                            </a>
+                            <div class="media-body">
+                                <textarea class="form-control" placeholder="Write comment..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-feed-separated">
+                <div class="social-avatar">
+                    <a href="">
+                        <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar2.png">
+                    </a>
+                </div>
+                <div class="social-feed-box">
+                    <div class="pull-right social-action dropdown">
+                        <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                            <i class="fa fa-angle-down"></i>
+                        </button>
+                        <ul class="dropdown-menu m-t-xs">
+                            <li><a href="#">Config</a></li>
+                        </ul>
+                    </div>
+                    <div class="social-avatar">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                    </div>
+                    <div class="social-body">
+                        <p>
+                            Text, and a search for 'lorem ipsum' will uncover many web sites still
+                            in their infancy.
+                        </p>
+                        <div class="btn-group">
+                            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                            <button class="btn btn-white btn-xs"><i class="fa fa-share"><a href="#"></a></i> Get spesific</button>
+                        </div>
+                    </div>
+                    <div class="social-footer">
+                        <div class="social-comment">
+                            <a href="" class="pull-left">
+                                <img alt="image" src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                            </a>
+                            <div class="media-body">
+                                <textarea class="form-control" placeholder="Write comment..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- <button class="btn btn-white btn-xs"><i class="fa fa-share"></i><a href="{% url 'post_spesific' item.id %}"></a> Get spesific</button> -->
+
+
+
+
+<!-- <div class="row">
+                    
+    <div class="col-sm-12">
+        <div class="panel panel-white post">
+            <div class="post-heading">
+                <div class="pull-left image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle avatar" alt="user profile image">
+                </div>
+                <div class="pull-left meta">
+                    <div class="title h5">
+                        <a href="#"><b>John Doe</b></a>
+                        uploaded a photo.
+                    </div>
+                    <h6 class="text-muted time">5 seconds ago</h6>
+                </div>
+            </div>
+            <div class="post-image">
+                <img src=""><img src="https://via.placeholder.com/400x200" class="image" alt="image post">
+            </div>
+            <div class="post-description">
+                <h4>Product Shoot</h4>
+                <p>Here is a picture of the walkway to our product shoot.</p>
+                <div class="stats">
+                    <a href="javascript:void(0);" class="btn btn-default stat-item">
+                        <i class="fa fa-thumbs-up icon"></i>228
+                    </a>
+                    <a href="javascript:void(0);" class="btn btn-default stat-item">
+                        <i class="fa fa-share icon"></i>128
+                    </a>
+                </div>
+            </div>
+            <div class="post-footer">
+                <div class="input-group"> 
+                    <input class="form-control" placeholder="Add a comment" type="text">
+                    <span class="input-group-addon">
+                        <a href="javascript:void(0);"><i class="fa fa-edit"></i></a>  
+                    </span>
+                </div>
+                <ul class="comments-list">
+                    <li class="comment">
+                        <a class="pull-left" href="javascript:void(0);">
+                            <img class="avatar" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                        </a>
+                        <div class="comment-body">
+                            <div class="comment-heading">
+                                <h4 class="user">John dOE</h4>
+                                <h5 class="time">7 minutes ago</h5>
+                            </div>
+                            <p>I really love this picture. I really wish i could have been there.</p>
+                        </div>
+                    </li>
+                    <li class="comment">
+                        <a class="pull-left" href="javascript:void(0);">
+                            <img class="avatar" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                        </a>
+                        <div class="comment-body">
+                            <div class="comment-heading">
+                                <h4 class="user">John Doe</h4>
+                                <h5 class="time">3 minutes ago</h5>
+                            </div>
+                            <p>I think I might you this for one of my projects.</p>
+                        </div>
+                    </li>
+                    <li class="comment">
+                        <a class="pull-left" href="javascript:void(0);">
+                            <img class="avatar" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="avatar">
+                        </a>
+                        <div class="comment-body">
+                            <div class="comment-heading">
+                                <h4 class="user">John Doe</h4>
+                                <h5 class="time">10 seconds ago</h5>
+                            </div>
+                            <p>Wow! This is gorgeous.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-12">
+        <div class="panel panel-white post">
+            <div class="post-heading">
+                <div class="pull-left image">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle avatar" alt="user profile image">
+                </div>
+                <div class="pull-left meta">
+                    <div class="title h5">
+                        <a href="#"><b>John Doe</b></a>
+                        made a post.
+                    </div>
+                    <h6 class="text-muted time">1 minute ago</h6>
+                </div>
+            </div> 
+            <div class="post-description"> 
+                <p>Anyone who is interested in helping out with the Mark &amp; Markson dinner party, please let me know before the week is over.</p>
+                <div class="stats">
+                    <a href="javascript:void(0);" class="btn btn-default stat-item">
+                        <i class="fa fa-thumbs-up icon"></i>2
+                    </a>
+                    <a href="javascript:void(0);" class="btn btn-default stat-item">
+                        <i class="fa fa-share icon"></i>12
+                    </a>
+                </div>
+            </div>
+            <div class="post-footer">
+                <div class="input-group"> 
+                    <input class="form-control" placeholder="Add a comment" type="text">
+                    <span class="input-group-addon">
+                        <a href="javascript:void(0);"><i class="fa fa-edit"></i></a>  
+                    </span>
+                </div>
+                <ul class="comments-list">
+                    <li class="comment">
+                        <a class="pull-left" href="javascript:void(0);">
+                            <img class="avatar" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
+                        </a>
+                        <div class="comment-body">
+                            <div class="comment-heading">
+                                <h4 class="user">Gavino Free</h4>
+                                <h5 class="time">5 minutes ago</h5>
+                            </div>
+                            <p>Sure, I'd help out.</p>
+                        </div>
+                        <ul class="comments-list">
+                            <li class="comment">
+                                <a class="pull-left" href="javascript:void(0);">
+                                    <img class="avatar" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">John Doe</h4>
+                                        <h5 class="time">3 minutes ago</h5>
+                                    </div>
+                                    <p>I will email you the details.</p>
+                                </div>
+                            </li> 
+                            <li class="comment">
+                                <a class="pull-left" href="javascript:void(0);">
+                                    <img class="avatar" src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="avatar">
+                                </a>
+                                <div class="comment-body">
+                                    <div class="comment-heading">
+                                        <h4 class="user">John Doe</h4>
+                                        <h5 class="time">3 minutes ago</h5>
+                                    </div>
+                                    <p>Ok, cool.</p>
+                                </div>
+                            </li> 
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> --> -->
+
+
+
+<!--  פונקציה מקורית לפיד הצגת חברים עובדת -->
+    <!-- @login_required(login_url='login')
+    def friends_feed(request):
+        posts = Post.objects.all().order_by('-created')
+        profile = Profile.objects.get(user=request.user)
+        friends = profile.friends.all()
+    
+        friendsposts = []
+        for post in posts:
+            if post.user == profile:
+                friendsposts.append(post)
+            else:
+                for friend in friends:
+                    if post.user.user == friend:
+                        friendsposts.append(post)
+    
+        getpage = request.GET.get('p')
+        if getpage == None:
+            getpage = 1
+        p = Paginator(friendsposts, 5)
+        page = p.page(getpage)
+        return render(request, 'socialmedia/friendsposts.html', {"friendsposts": friendsposts, "friendsposts": page.object_list, "p": p}) -->
+
+
+
+<!-- קטע HTML לנסיון שינוי כפתור לליק ואנלייק  -->
+<!-- 
+    {% if request.user.user.profile_user in item.likes.all %}
+        <a href="{% url 'likes' item.id %}" class="btn btn-white btn-xs"><i class="fa fa-thumbs-down"></i> UNLike this!</a>
+    {% else %}
+        <a href="{% url 'likes' item.id %}" class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</a>
+    {% endif %}
+    <button class="btn btn-white btn-xs" disabled><i class="fa fa-thumbs-up" style="color:green;"></i>{{item.likes.count}} People liked this</button>
+    <a href="{% url 'addcomment' item.id %}" class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</a>
+    <a href="{% url 'post_spesific' item.id %}" class="btn btn-white btn-xs"><i class="fa fa-share"></i>Get spesific</a> -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ניסיון השגת שינוי כפתור לייק לאנלייק בפיד חברים לא עובד טוב -->
+        <!-- @login_required(login_url='login')
+        def friends_feed(request):
+            posts = Post.objects.all().order_by('-created')
+            profile = Profile.objects.get(user=request.user)
+            friends = profile.friends.all()
+        
+            friendsposts = []
+        
+            for post in posts:
+                if post.user == profile:
+                    if len(post.likes.all()) == 0:
+                        friendsposts.append({"isLike": False, "post": post})
+                    isLike = False
+                    friendsposts.append(post)
+                    for like in post.likes.all():
+                        if request.user == like.user:
+                            isLike = True
+                        friendsposts.append({"isLike": isLike, "post": post})
+        
+                else:
+                    for friend in friends:
+                        if post.user.user == friend:
+                            if len(post.likes.all()) == 0:
+                                friendsposts.append({"isLike": False, "post": post})
+                            isLike = False
+                            friendsposts.append(post)
+                            for like in post.likes.all():
+                                if request.user == like.user:
+                                    isLike = True
+                                friendsposts.append({"isLike": isLike, "post": post})
+        
+            getpage = request.GET.get('p')
+            if getpage == None:
+                getpage = 1
+            p = Paginator(friendsposts, 5)
+            page = p.page(getpage)
+            return render(request, 'socialmedia/friendsposts.html', {"friendsposts": friendsposts, "friendsposts": page.object_list, "p": p}) -->
+
+
+
+
+
+
+
+
+
+<!--  -->

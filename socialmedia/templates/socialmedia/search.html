@@ -1,0 +1,44 @@
+{% extends 'main.html'%}
+
+{% block content %}
+    <div class="contentcenter" style="margin-top: 50px;">
+        <div class="container">
+            <h1 style="font-weight: bold;color: rgb(201, 37, 37);">Search Resaults for Profiles:</h1>
+            <ul class="list-group">
+                {% for profile in profiles %}
+                    <li class="list-group-item">
+                        <a href="{% url 'profile_username' profile.user.username %}" class="btn btn-sm btn-primary">{{profile.first_name}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="container">
+            <h1 style="font-weight: bold;color: rgb(201, 37, 37);">Search Resaults for Posts:</h1>
+            <ul class="list-group">
+                {% for post in posts %}
+                    <li class="list-group-item">
+                        <a href="{% url 'post_spesific' post.id %}" class="btn btn-sm btn-secondary">{{post.body}}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="container" style="margin-bottom: 100px">
+            <h1 style="font-weight: bold;color: rgb(201, 37, 37);">Search Resaults for Comments:</h1>
+            <ul class="list-group">
+                {% for comment in comments %}
+                    <li class="list-group-item">
+                        <span style="font-weight: bold">{{comment.body}}</span>
+                         <span style="font-weight: bold"> -> </span> 
+                         <span style="color: red">Comment by</span> 
+                         <span style="font-weight: bold"> -> </span> 
+                         <a href="{% url 'profile_username' comment.user.username %}" class="btn btn-sm btn-primary">{{comment.user.username}}</a> 
+                         <a href="{% url 'post_spesific' comment.post.id %}" class="btn btn-sm btn-success">To post</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <small style="color: rgb(252, 252, 252);font-weight: bold">Created By Amit Dehas ©</small>
+    </div>
+{% endblock %}

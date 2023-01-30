@@ -1,0 +1,525 @@
+{% extends 'main.html'%}
+
+{% block content %}
+<style>
+.profile-widget {
+  position: relative;
+}
+.profile-widget .image-container {
+  background-size: cover;
+  background-position: center;
+  padding: 190px 0 10px;
+}
+.profile-widget .image-container .profile-background {
+  width: 100%;
+  height: auto;
+}
+.profile-widget .image-container .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto -60px;
+  display: block;
+}
+.profile-widget .details {
+  padding: 50px 15px 15px;
+  text-align: center;
+}
+/* End Component: Profile Widget */
+/********************************************************************
+*********************************************************************
+*********************************************************************/
+/* Component: Mini Profile Widget */
+.mini-profile-widget .image-container .avatar {
+  width: 180px;
+  height: 180px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: white;
+  padding: 4px;
+  border: 1px solid #dddddd;
+}
+.mini-profile-widget .details {
+  text-align: center;
+}
+
+
+
+/* Component: Panel */
+.panel {
+  border-radius: 0;
+  margin-bottom: 30px;
+}
+.panel.solid-color {
+  color: white;
+}
+.panel .panel-heading {
+  border-radius: 0;
+  position: relative;
+}
+.panel .panel-heading > .controls {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+.panel .panel-heading > .controls .nav.nav-pills {
+  margin: -8px 0 0 0;
+}
+.panel .panel-heading > .controls .nav.nav-pills li a {
+  padding: 5px 8px;
+}
+.panel .panel-heading .clickable {
+  margin-top: 0px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.panel .panel-heading.no-heading-border {
+  border-bottom-color: transparent;
+}
+.panel .panel-heading .left {
+  float: left;
+}
+.panel .panel-heading .right {
+  float: right;
+}
+.panel .panel-title {
+  font-size: 16px;
+  line-height: 20px;
+}
+.panel .panel-title.panel-title-sm {
+  font-size: 18px;
+  line-height: 28px;
+}
+.panel .panel-title.panel-title-lg {
+  font-size: 24px;
+  line-height: 34px;
+}
+.panel .panel-body {
+  font-size: 13px;
+}
+.panel .panel-body > .body-section {
+  margin: 0px 0px 20px;
+}
+.panel .panel-body > .body-section > .section-heading {
+  margin: 0px 0px 5px;
+  font-weight: bold;
+}
+.panel .panel-body > .body-section > .section-content {
+  margin: 0px 0px 10px;
+}
+.panel-white {
+  border: 1px solid #dddddd;
+}
+.panel-white > .panel-heading {
+  color: #333;
+  background-color: #fff;
+  border-color: #ddd;
+}
+.panel-white > .panel-footer {
+  background-color: #fff;
+  border-color: #ddd;
+}
+.panel-primary {
+  border: 1px solid #dddddd;
+}
+.panel-purple {
+  border: 1px solid #dddddd;
+}
+.panel-purple > .panel-heading {
+  color: #fff;
+  background-color: #8e44ad;
+  border: none;
+}
+.panel-purple > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-light-purple {
+  border: 1px solid #dddddd;
+}
+.panel-light-purple > .panel-heading {
+  color: #fff;
+  background-color: #9b59b6;
+  border: none;
+}
+.panel-light-purple > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-blue,
+.panel-info {
+  border: 1px solid #dddddd;
+}
+.panel-blue > .panel-heading,
+.panel-info > .panel-heading {
+  color: #fff;
+  background-color: #2980b9;
+  border: none;
+}
+.panel-blue > .panel-heading .panel-title a:hover,
+.panel-info > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-light-blue {
+  border: 1px solid #dddddd;
+}
+.panel-light-blue > .panel-heading {
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+}
+.panel-light-blue > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-green,
+.panel-success {
+  border: 1px solid #dddddd;
+}
+.panel-green > .panel-heading,
+.panel-success > .panel-heading {
+  color: #fff;
+  background-color: #27ae60;
+  border: none;
+}
+.panel-green > .panel-heading .panel-title a:hover,
+.panel-success > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-light-green {
+  border: 1px solid #dddddd;
+}
+.panel-light-green > .panel-heading {
+  color: #fff;
+  background-color: #2ecc71;
+  border: none;
+}
+.panel-light-green > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-orange,
+.panel-warning {
+  border: 1px solid #dddddd;
+}
+.panel-orange > .panel-heading,
+.panel-warning > .panel-heading {
+  color: #fff;
+  background-color: #e82c0c;
+  border: none;
+}
+.panel-orange > .panel-heading .panel-title a:hover,
+.panel-warning > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-light-orange {
+  border: 1px solid #dddddd;
+}
+.panel-light-orange > .panel-heading {
+  color: #fff;
+  background-color: #ff530d;
+  border: none;
+}
+.panel-light-orange > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-red,
+.panel-danger {
+  border: 1px solid #dddddd;
+}
+.panel-red > .panel-heading,
+.panel-danger > .panel-heading {
+  color: #fff;
+  background-color: #d40d12;
+  border: none;
+}
+.panel-red > .panel-heading .panel-title a:hover,
+.panel-danger > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-light-red {
+  border: 1px solid #dddddd;
+}
+.panel-light-red > .panel-heading {
+  color: #fff;
+  background-color: #ff1d23;
+  border: none;
+}
+.panel-light-red > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-pink {
+  border: 1px solid #dddddd;
+}
+.panel-pink > .panel-heading {
+  color: #fff;
+  background-color: #fe31ab;
+  border: none;
+}
+.panel-pink > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-light-pink {
+  border: 1px solid #dddddd;
+}
+.panel-light-pink > .panel-heading {
+  color: #fff;
+  background-color: #fd32c0;
+  border: none;
+}
+.panel-light-pink > .panel-heading .panel-title a:hover {
+  color: #f0f0f0;
+}
+.panel-group .panel {
+  border-radius: 0;
+}
+.panel-group .panel + .panel {
+  margin-top: 0;
+  border-top: 0;
+}
+
+/* Component: Posts */
+.post .post-heading {
+  height: 95px;
+  padding: 20px 15px;
+}
+.post .post-heading .avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+  margin-right: 15px;
+}
+.post .post-heading .meta .title {
+  margin-bottom: 0;
+}
+.post .post-heading .meta .title a {
+  color: black;
+}
+.post .post-heading .meta .title a:hover {
+  color: #aaaaaa;
+}
+.post .post-heading .meta .time {
+  margin-top: 8px;
+  color: #999;
+}
+.post .post-image .image {
+  width: 100%;
+  height: auto;
+}
+.post .post-description {
+  padding: 15px;
+}
+.post .post-description p {
+  font-size: 14px;
+}
+.post .post-description .stats {
+  margin-top: 20px;
+}
+.post .post-description .stats .stat-item {
+  display: inline-block;
+  margin-right: 15px;
+}
+.post .post-description .stats .stat-item .icon {
+  margin-right: 8px;
+}
+.post .post-footer {
+  border-top: 1px solid #ddd;
+  padding: 15px;
+}
+.post .post-footer .input-group-addon a {
+  color: #454545;
+}
+.post .post-footer .comments-list {
+  padding: 0;
+  margin-top: 20px;
+  list-style-type: none;
+}
+.post .post-footer .comments-list .comment {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+}
+.post .post-footer .comments-list .comment .avatar {
+  width: 35px;
+  height: 35px;
+}
+.post .post-footer .comments-list .comment .comment-heading {
+  display: block;
+  width: 100%;
+}
+.post .post-footer .comments-list .comment .comment-heading .user {
+  font-size: 14px;
+  font-weight: bold;
+  display: inline;
+  margin-top: 0;
+  margin-right: 10px;
+}
+.post .post-footer .comments-list .comment .comment-heading .time {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 0;
+  display: inline;
+}
+.post .post-footer .comments-list .comment .comment-body {
+  margin-left: 50px;
+}
+.post .post-footer .comments-list .comment > .comments-list {
+  margin-left: 50px;
+}
+
+.fluid-width-video-wrapper {
+    width: 100%;
+    position: relative;
+    padding: 0;
+}
+
+.fluid-width-video-wrapper iframe, .fluid-width-video-wrapper object, .fluid-width-video-wrapper embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11" style="background-color: white;">
+                <div class="panel panel-white profile-widget">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="image-container bg2" style="background:url({{profile.coverUrl}})"> 
+                                <img src="{{profile.imageUrl}}" class="avatar" alt="avatar"> 
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="details">
+                                <h4>{{profile.first_name}} {{profile.last_name}}<i class="fa fa-sheild"></i></h4>
+                                <div>Date of birth {{profile.dob}}</div>
+                                <div>Lives in {{profile.city}}</div>
+                                {% if profile.relationship == True %}
+                                  <div>Relationship status: In relationship</div>
+                                {% else %}
+                                  <div>Relationship status: Single</div>
+                                {% endif %}
+                                <br>
+                                <div style="font-weight:bold">Posts Created: {{profile.post_set.all |length}}</div>
+                                <br>
+                                <div style="font-weight:bold">Friends: {{profile.friends.all |length}}</div>
+                                <br>
+                                <div class="mg-top-10">
+                                  {% if profile.user.username == request.user.username %}
+                                  <div>
+                                    <a href="{% url 'editprofile' request.user.username %}" class="btn btn-primary">Edit Profile</a>
+                                    <a href="{% url 'remove_profile' request.user.username %}" class="btn btn-danger">Remove Profile</a>
+                                  </div>
+                                  {% endif %}
+                                  <div>
+                                    <form action="{% url 'addfriend' profile.user.username %}" method="POST">
+                                      {% csrf_token %}
+                                      {% if profile.user != request.user %}
+                                                  {% if not isFriend %}
+                                                    <button type="submit" class="btn btn-success">
+                                                      <i class="fa fa-user-plus">Add {{profile.first_name}} as a Friend</i>
+                                                    </button>
+                                                  {% else %}
+                                                    <button type="submit" class="btn btn-danger">
+                                                      <i class="fa fa-user-plus">Unfriend {{profile.first_name}}</i>
+                                                    </button>
+                                                  {% endif %}
+                                      {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                  <center>
+                    <h1 style="color:grey">Posts of {{profile.user.username}}</h1>
+                  </center>
+                </div>
+                <div class="row">
+                  <div style="border: solid;border-color: lightblue;">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                       {% for page_number in p.page_range %}
+                       <li class="page-item"><a class="page-link" href="?p={{page_number}}">{{page_number}}</a></li>
+                    
+                       {% endfor %}
+                     
+                      </ul>
+                    </nav>
+                  </div>
+                    {% for post in posts %}
+                            <div class="col-sm-12">
+                                <div class="panel panel-white post">
+                                    <div class="post-heading">
+                                        <div class="pull-left image">
+                                            <img src="{{post.user.imageUrl}}" class="img-circle avatar" alt="user profile image">
+                                        </div>
+                                        <div class="pull-left meta">
+                                            <div class="title h5">
+                                                <a href="#"><b>{{post.user.first_name}} {{post.user.last_name}}</b></a>
+                                            </div>
+                                            <h6 class="text-muted time">{{post.created}}</h6>
+                                        </div>
+                                        {% if post.user.user.username == request.user.username %}
+                                        <div style="text-align: right">
+                                          <span>
+                                            <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-success">Edit</a>
+                                            <a href="{% url 'remove_post' post.id %}" class="btn btn-sm btn-danger">Delete</a>
+                                          </span>
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                    <div class="post-image">
+                                        <img src="{{post.imageUrl}}">
+                                    </div>
+                                    <div class="post-description">
+                                        <p style="font-weight:bold">{{post.body}}</p>
+                                        <div class="btn-group">
+                                          {% if not request.user.profile_user in post.likes.all %}
+                                              <a href="{% url 'likes' post.id %}" class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</a>
+                                          {% else %}
+                                              <a href="{% url 'likes' post.id %}" class="btn btn-white btn-xs"><i class="fa fa-thumbs-down"></i> UNLike this!</a>
+                                          {% endif %}
+                                          <button class="btn btn-white btn-xs" disabled><i class="fa fa-thumbs-up" style="color:green;"></i>{{post.likes.count}} People liked this</button>
+                                          <a href="{% url 'addcomment' post.id %}" class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</a>
+                                          <a href="{% url 'post_spesific' post.id %}" class="btn btn-white btn-xs"><i class="fa fa-share"></i>Get spesific</a>
+                                        </div>
+                                    </div>
+                                    <div class="post-footer">
+                                        <ul class="comments-list">
+                                          {% for comment in post.comment_set.all %}
+                                              <li class="comment">
+                                                  <a class="pull-left" href="javascript:void(0);">
+                                                      <img class="avatar" src="{{comment.user.profile_user.imageUrl}}" alt="avatar">
+                                                  </a>
+                                                  <div class="comment-body">
+                                                      <div class="comment-heading">
+                                                          <h4 class="user">{{comment.user.username}}</h4>
+                                                          <h5 class="time">{{comment.created}}</h5>
+                                                          <div style="text-align: right">
+                                                            {% if comment.user.username == request.user.username %}
+                                                                <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-success">Edit comment</a>
+                                                                <a href="{% url 'remove_Comment' comment.id %}" class="btn btn-sm btn-danger">Delete comment</a>
+                                                            {% endif %}
+                                                          </div>
+                                                      </div>
+                                                      <p>{{comment.body}}</p>
+                                                  </div>
+                                                  <div style="color:lightblue">__________________________________________________________________________________________________________________________________</div>
+                                              </li>
+                                          {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %} 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;">
+      <small style="color: rgb(252, 252, 252);font-weight: bold">Created By Amit Dehas ©</small>
+    </div>
+{% endblock %}
